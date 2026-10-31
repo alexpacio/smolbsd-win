@@ -1,0 +1,3 @@
+[submodule "smolBSD"]
+	path = smolBSD
+	url = https://github.com/NetBSDfr/smolBSD.git
