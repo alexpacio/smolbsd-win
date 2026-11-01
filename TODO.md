@@ -2,10 +2,7 @@ to implement:
 
 - a way to create new root images with declarative approach to include packages (apps and libraries) and custom scripts. See smolBSD and take inspiration from it
 - ability for nitro to start more than one app and ability for the hadron service toml definition file to define more than a single app
-- the guest program should be splitted:
-    - a C (or rust, your choice but better if in C) lang written dynamic library that implements the virtio serial data exchange business logic so that we can have programs in golang, c, c++,dlang languages as well that just reuse the dynamic library to communicate with the host
-    - user's programs written in compiled languages like golang, c, c++, dlang, rust languages, all running their major async/coroutines/fibers runtimes. Create major examples to run an address book with state persisted using the primitives offered by the host side's database.
-    I'd like to understand if Fory has to be used here to represent objects to be sent back and forth with the host in a typed way.
+- guest applications use C++, Go and Rust only. Keep the shared C transport as an internal library, with Boost.Asio, goroutine and Tokio adapters. Use native Fory xlang models for typed user-defined objects shared with the host. C, D and Node application targets and their custom codec/runtime layers have been removed in the Hadron repositories.
 - implement env var passing and secret passing to the guest program(s)
 - implement namespacing for isolation of set of services. The host side should be isolating access to data as well across namespaces
 - implement host side rate limiting and anti DDoS over virtio serial
